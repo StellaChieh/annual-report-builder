@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+<!--mapper namespace="cwb.cmt.surface.dao.CliSumDao"--> 
+<mapper namespace="cwb.cmt.surface.dao.CliSumDao"> 
+
+	<!--General Table for Climatological Summaries-->
+	<select id ="selectMonthData"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum">  
+		SELECT Stno AS stno, ObsTime As obsTime, StnPres AS stnPres, Tx AS tx, TxMaxAbs AS txMaxAbs, 
+			TxMaxAbsTime AS txMaxAbsTime, TxMinAbs AS txMinAbs, TxMinAbsTime AS txMinAbsTime, RH AS rh,
+			RHMin AS rhMin, SunShine AS sunshine, SunShineRate AS sunshineRate,	WS AS ws, WD AS wd, 
+			WSMax AS wsMax, WDMax AS wdMax, WMaxTime AS wMaxTime, WSGust AS wsGust, WGustTime AS wGustTime, 
+			Precp1DayMax AS precp1DayMax, Precp1DayMaxTime AS precp1DayMaxTime, CAmtMean AS cAmtMean, 
+			VisbMean AS visbMean, Precp AS precp
+		<!--FROM his_cwbmn-->
+		FROM ${table}
+		WHERE Year(ObsTime)= #{year} 
+		AND Stno IN	
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}
+	    </foreach>
+	    ORDER BY Stno, Month(ObsTime)
+	</select > 
+	
+	<!--select Tx 5H, 14H, 21H / HourAVG-->
+	<select id ="selectHourAvg"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum">  
+		SELECT Stno AS stno, ObsTime AS obsTime, AVG(Tx) AS txAvg , AVG(RH) AS rhAvg, AVG(IF(CAmtTotal IN(-9.7),NULL, CAmtTotal)) AS cAmtTotalAvg
+		<!--FROM his_cwbhr-->
+		FROM ${table}
+		WHERE Stno IN
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>
+		AND Year(ObsTime)= #{year} 
+		AND Hour(ObsTime) IN (5,14,21)
+		AND RH NOT IN (-9.95, -99.5, -99.95, -999.95, -999.5, -9999.5, -9999.95, -9995, -9.7, -99.7, -999.7, -9999.7)
+		GROUP BY Stno, Month(ObsTime), Hour(ObsTime)
+	</select >
+	
+	<!--select DayAVG-->
+	<select id ="selectDayAvg"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum">  
+		SELECT Stno AS stno, ObsTime AS obsTime, AVG(TxMaxAbs) AS txMaxAvg, AVG(TxMinAbs) AS txMinAvg
+		<!--FROM his_cwbdy-->
+		FROM ${table}
+		WHERE Stno IN
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach> 
+		AND Year(ObsTime)= #{year}
+		AND TxMinAbs NOT IN (-99.5)
+		AND TxMaxAbs NOT IN (-99.5)
+		GROUP BY Stno, Month(ObsTime)
+	</select >
+	
+	<!--select HourSUM-->
+	<select id ="selectPrecpHourSum"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT Stno, ObsTime, SUM(PrecpHour) AS precpHourSum
+		<!--FROM his_cwbhr-->
+		FROM ${table}
+		WHERE Stno IN	
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>
+		AND Year(ObsTime)= #{year}  
+		AND PrecpHour NOT IN (-9.5)
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+
+	<!--select PrecpDays precp>=10-->
+	<select id ="selectPrecpDays_10mm"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT Stno, ObsTime, Count(Precp) AS precpDays_10mm
+		<!--FROM his_cwbdy-->
+		FROM ${table}
+		WHERE Stno IN 	
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>
+		AND Year(ObsTime)= #{year}
+			<![CDATA[
+			AND Precp>=10
+			]]>
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	<!--select PrecpDays precp>=1.0-->
+	<select id ="selectPrecpDays_1mm"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT Stno, ObsTime, Count(Precp) AS precpDays_1mm
+		<!--FROM his_cwbdy-->
+		FROM ${table}
+		WHERE Stno IN 	
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>
+		AND Year(ObsTime)= #{year} 
+			<![CDATA[
+			AND Precp>=1.0
+			]]>
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+
+	<!--select PrecpDays precp>=0.1-->
+	<select id ="selectPrecpDays_01mm"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT Stno, ObsTime, Count(Precp) AS precpDays_01mm
+		<!--FROM his_cwbdy-->
+		FROM ${table}
+		WHERE Stno IN 	
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>
+		AND Year(ObsTime)= #{year}
+			<![CDATA[
+			AND Precp>=0.1
+			]]>
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	<!--select MonthCount weather condition / EvapA = -999.7 special value -->
+	<select id ="selectWeatherCondition"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT Stno, ObsTime, IF(EvapA IN (-9.7, -99.7, -999.7, -9999.7), "/", EvapA) AS evapA, IF(SnowDay=0, NULL, SnowDay) AS snowDay, IF(FogDay IS NULL, 0, FogDay) AS fogDay, IF(ThunderstormDay IS NULL, 0, ThunderstormDay) AS thunderstormDay,
+			WSMaxGE10Day AS wsMaxGE10Day, FrostDay AS frostDay, ClearSkyDay AS clearSkyDay, ScatteredSkyDay AS scatteredSkyDay, BrokenSkyDay AS brokenSkyDay, OvercastSkyDay AS overcastSkyDay
+		<!--FROM his_cwbmn-->
+		FROM ${table}
+		WHERE Stno IN
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach> 
+		AND Year(ObsTime)= #{year} 
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	<!--select DayCount TxMinAbs<=0-->
+	<select id ="selectTxMinAbs_LE0"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT t1.Stno, t1.ObsTime , Count(t1.TxMinAbs) AS txMinAbs_LE0
+		FROM
+			(SELECT Stno, ObsTime, TxMinAbs
+			<!--FROM his_cwbdy-->
+			FROM ${table}
+			WHERE Stno IN
+			<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+				#{element.stno}, #{element.month}
+			</foreach> 
+			AND Year(ObsTime)= #{year} 
+				<![CDATA[
+				AND TxMinAbs<=0
+				]]>
+			AND TxMinAbs NOT IN (-99.5)
+			)AS t1
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	<!--select DayCOUNT TxMinAbs<=10-->
+	<select id ="selectTxMinAbs_LE10"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT t1.Stno, t1.ObsTime , Count(t1.TxMinAbs) AS txMinAbs_LE10
+		FROM
+			(SELECT Stno, ObsTime, TxMinAbs
+			<!--FROM his_cwbdy-->
+			FROM ${table}
+			WHERE Stno IN
+			<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+				#{element.stno}, #{element.month}
+			</foreach> 
+			AND Year(ObsTime)= #{year}
+				<![CDATA[
+				AND TxMinAbs<=10
+				]]>
+			AND TxMinAbs NOT IN (-99.5)
+			)AS t1
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	<!--select DayCOUNT TxMinAbs>=20-->
+	<select id ="selectTxMinAbs_GE20"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT t1.Stno, t1.ObsTime , Count(t1.TxMinAbs) AS txMinAbs_GE20
+		FROM
+			(SELECT Stno, ObsTime, TxMinAbs
+			<!--FROM his_cwbdy-->
+			FROM ${table}
+			WHERE Stno in
+			<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+				#{element.stno}, #{element.month}
+			</foreach> 
+			AND Year(ObsTime)= #{year} 
+				<![CDATA[
+				AND TxMinAbs>=20
+				]]>
+			AND TxMinAbs NOT IN (-99.5)
+			)AS t1
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	<!--select DayCOUNT TxMinAbs>=25-->
+		<select id ="selectTxMaxAbs_GE25"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT t1.Stno, t1.ObsTime , Count(t1.TxMaxAbs) AS txMaxAbs_GE25
+		FROM
+			(SELECT Stno, ObsTime, TxMaxAbs
+			<!--FROM his_cwbdy-->
+			FROM ${table}
+			WHERE Stno in
+			<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+				#{element.stno}, #{element.month}
+			</foreach> 
+			AND Year(ObsTime)= #{year} 
+				<![CDATA[
+				AND TxMaxAbs >=25
+				]]>
+			AND TxMaxAbs NOT IN (-99.5)
+			)AS t1
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	<!--select DayCOUNT TxMinAbs>=30-->
+	<select id ="selectTxMaxAbs_GE30"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT t1.Stno, t1.ObsTime , Count(t1.TxMaxAbs) AS txMaxAbs_GE30
+		FROM
+			(SELECT Stno, ObsTime, TxMaxAbs
+			<!--FROM his_cwbdy-->
+			FROM ${table}
+			WHERE Stno in
+			<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+				#{element.stno}, #{element.month}
+			</foreach> 
+			AND Year(ObsTime)= #{year} 
+				<![CDATA[
+				AND TxMaxAbs >=30
+				]]>
+			AND TxMaxAbs NOT IN (-99.5)
+			)AS t1
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	<!--select DayCOUNT TxMinAbs>=35-->
+	<select id ="selectTxMaxAbs_GE35"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT t1.Stno, t1.ObsTime , Count(t1.TxMaxAbs) AS txMaxAbs_GE35
+		FROM
+			(SELECT Stno, ObsTime, TxMaxAbs
+			<!--FROM his_cwbdy-->
+			FROM ${table}
+			WHERE Stno in
+			<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+				#{element.stno}, #{element.month}
+			</foreach> 
+			AND Year(ObsTime)= #{year} 
+				<![CDATA[
+				AND TxMaxAbs >=35
+				]]>
+			AND TxMaxAbs NOT IN (-99.5)
+			)AS t1
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	
+	<!--Count雨 precp!=0-->
+	<select id ="selectPrecpDay"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT Stno, ObsTime, COUNT(Precp) AS precpDay
+		<!--FROM his_cwbdy-->
+		FROM ${table}
+		WHERE Stno IN
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>  
+		AND Year(ObsTime)= #{year}
+		AND Precp!=0
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	
+	<!--Count霾 StatO2= 2 or StatO2= 3 or StatO2= 8-->
+	<select id ="selectHazeDay"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT Stno, ObsTime, COUNT(StatO2) AS statO2 
+		<!--FROM his_cwbdy-->
+		FROM ${table}
+		WHERE Stno IN
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+		</foreach> 
+		AND Year(ObsTime)= #{year}
+		AND (StatO2=2 OR StatO2=3 OR StatO2=8)
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	
+	<!--雹 StatF3>=4 -->
+	<select id ="selectHailDay"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT Stno, ObsTime, Count(StatF3) AS statF3
+		<!--FROM his_cwbdy-->
+		FROM ${table}
+		WHERE Stno IN 
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>  
+		AND Year(ObsTime)= #{year} 
+		<![CDATA[
+			AND StatF3 >= 4
+			]]>
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	
+	<!--露　StatP2=1 -->
+	<select id ="selectDewDay"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT Stno, ObsTime, Count(StatP2) AS statP2
+		<!--FROM his_cwbdy-->
+		FROM ${table}
+		WHERE Stno IN 
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>  
+		AND Year(ObsTime)= #{year}
+		AND StatP2=1
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+	
+	<!--snow Date 初終雪日-->
+	<select id ="selectSnowDate"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum">
+		SELECT Stno, ObsTime, Min(ObsTime) AS statF1_MinTime, Max(ObsTime) AS statF1_MaxTime
+		<!--FROM his_cwbdy-->
+		FROM ${table}
+		WHERE 
+		(Stno IN
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>  
+		AND Year(ObsTime)= #{year} AND StatF1= 1) 
+		OR (Stno IN 
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach> 
+		AND Year(ObsTime)= #{year} AND StatF1= 2)
+		OR (Stno IN 
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach> 
+		AND Year(ObsTime)= #{year} AND StatF1= 3)
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+
+	<!--Frost Date 初終霜日-->
+	<select id ="selectFrostDate"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.CliSum"> 
+		SELECT Stno, ObsTime, Min(ObsTime) AS statF2_MinTime, Max(ObsTime) AS statF2_MaxTime
+		<!--FROM his_cwbdy-->
+		FROM ${table}
+		WHERE 
+		(Stno IN
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>  
+		AND Year(ObsTime)= #{year} AND StatF2= 1) 
+		OR (Stno IN 
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach> 
+		AND Year(ObsTime)= #{year} AND StatF2= 2)
+		OR (Stno IN 
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach> 
+		AND Year(ObsTime)= #{year} AND StatF2= 3)
+		OR (Stno IN 
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach> 
+		AND Year(ObsTime)= #{year} AND StatF2= 4)
+		GROUP BY Stno, Month(ObsTime)
+	</select>
+	
+</mapper>

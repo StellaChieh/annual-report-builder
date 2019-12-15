@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 對應 Dao 的 package路徑 -->
+<mapper namespace="dao.WindRoseDao">
+
+	<select id="getStation" parameterType="String" resultType="Station">
+		select * from station where stno = #{stno}
+	</select>
+	
+	<select id="getTotalCount" parameterType="Map" resultType="int">
+	    SELECT SUM(cnt) as totalCnt
+	    FROM (
+		  SELECT count(*) as cnt
+		    FROM cwbhr
+		    WHERE stno = '${stno}' 
+		      AND obstime &gt;= '${startDate}'
+		      AND obstime &lt; '${endDate}'
+		      AND month(obstime) = '${month}'  
+		  UNION 
+		  SELECT count(*) as cnt
+		    FROM his_cwbhr
+		    WHERE stno = '${stno}' 
+		      AND obstime &gt;= '${startDate}'
+		      AND obstime &lt; '${endDate}'
+		      AND month(obstime) = '${month}'  
+	    ) as sumCount
+	</select>
+
+	<select id="getTotalCountTY" parameterType="Map" resultType="int">
+	    SELECT SUM(cnt) as totalCnt
+	    FROM (
+		  SELECT count(*) as cnt
+		    FROM cwbhr
+		    WHERE stno = '${stno}' 
+		      AND obstime &gt;= '${startDate}'
+		      AND obstime &lt; '${endDate}'
+		  UNION 
+		  SELECT count(*) as cnt
+		    FROM his_cwbhr
+		    WHERE stno = '${stno}' 
+		      AND obstime &gt;= '${startDate}'
+		      AND obstime &lt; '${endDate}'
+	    ) as sumCount
+	</select>
+	
+	<select id="getWindRoseProps" parameterType="Map" resultType="WindRose">
+		SELECT wd
+			   ,count(CASE WHEN ws BETWEEN 0.3 AND 5.4 THEN 'I' END) "level1"
+			   ,count(CASE WHEN ws BETWEEN 5.5 AND 13.8 THEN 'II' END) "level2"
+			   ,count(CASE WHEN ws BETWEEN 13.9 AND 999 THEN 'III' END) "level3"
+			   ,count(CASE WHEN ws BETWEEN 0 AND 0.2 THEN 'static' END) "staticWind"
+		  FROM cwbhr
+		 WHERE stno = '${stno}' 
+		   AND obstime &gt;= '${startDate}'
+		   AND obstime &lt; '${endDate}'
+		   AND month(obstime) = '${month}'
+		 GROUP BY wd		     
+		 UNION
+		 SELECT wd
+			   ,count(CASE WHEN ws BETWEEN 0.3 AND 5.4 THEN 'I' END) "level1"
+			   ,count(CASE WHEN ws BETWEEN 5.5 AND 13.8 THEN 'II' END) "level2"
+			   ,count(CASE WHEN ws BETWEEN 13.9 AND 999 THEN 'III' END) "level3"
+			   ,count(CASE WHEN ws BETWEEN 0 AND 0.2 THEN 'static' END) "staticWind"
+		  FROM his_cwbhr
+		 WHERE stno = '${stno}' 
+		   AND obstime &gt;= '${startDate}'
+		   AND obstime &lt; '${endDate}'
+		   AND month(obstime) = '${month}'  		   
+		 GROUP BY wd
+	</select>
+
+	<select id="getWindRosePropsTY" parameterType="Map" resultType="WindRose">
+		SELECT wd
+			   ,count(CASE WHEN ws BETWEEN 0.3 AND 5.4 THEN 'I' END) "level1"
+			   ,count(CASE WHEN ws BETWEEN 5.5 AND 13.8 THEN 'II' END) "level2"
+			   ,count(CASE WHEN ws BETWEEN 13.9 AND 999 THEN 'III' END) "level3"
+			   ,count(CASE WHEN ws BETWEEN 0 AND 0.2 THEN 'static' END) "staticWind"
+		  FROM cwbhr
+		 WHERE stno = '${stno}' 
+		   AND obstime &gt;= '${startDate}'
+		   AND obstime &lt; '${endDate}'
+		 GROUP BY wd		     
+		 UNION
+		 SELECT wd
+			   ,count(CASE WHEN ws BETWEEN 0.3 AND 5.4 THEN 'I' END) "level1"
+			   ,count(CASE WHEN ws BETWEEN 5.5 AND 13.8 THEN 'II' END) "level2"
+			   ,count(CASE WHEN ws BETWEEN 13.9 AND 999 THEN 'III' END) "level3"
+			   ,count(CASE WHEN ws BETWEEN 0 AND 0.2 THEN 'static' END) "staticWind"
+		  FROM his_cwbhr
+		 WHERE stno = '${stno}' 
+		   AND obstime &gt;= '${startDate}'
+		   AND obstime &lt; '${endDate}'
+		 GROUP BY wd
+	</select>
+</mapper>

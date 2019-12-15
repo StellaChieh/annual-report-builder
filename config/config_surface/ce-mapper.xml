@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+<!--mapper namespace="cwb.cmt.surface.dao.AuxCliSumDao"--> 
+<mapper namespace="cwb.cmt.surface.dao.CeDao"> 
+	<!--ClimaticElement-->
+	<select id ="selectClimaticElement"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.MeanStationValues">  
+		SELECT t.Stno AS stno, ObsTime AS obsTime, ${column} AS monthlyValue, StnCName AS stnCName, StnBeginTime AS stnBeginTime,
+		StnEndTime AS stnEndTime
+		From ${table} as t, station
+		WHERE t.Stno = station.Stno
+		AND t.Stno LIKE #{prefix}
+		AND YEAR(ObsTime) = #{year}
+		<![CDATA[
+		AND MONTH(ObsTime)<=#{month}
+		]]>
+		ORDER BY t.Stno
+	</select > 
+	
+	<!--ClimaticElement Flag-->
+	<select id ="selectClimaticElementFlag"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.MeanStationValues">  
+		SELECT t.Stno AS stno, ObsTime AS obsTime, ${column} AS monthlyValue, ${flag} AS flag, StnCName AS stnCName, 
+		StnBeginTime AS stnBeginTime,
+		StnEndTime AS stnEndTime
+		From ${table} as t, station
+		WHERE t.Stno = station.Stno
+		AND t.Stno LIKE #{prefix}
+		AND YEAR(ObsTime) = #{year}
+		<![CDATA[
+		AND MONTH(ObsTime)<=#{month}
+		]]>
+		ORDER BY t.Stno
+	</select > 
+	
+	<!--ClimaticElement Flag&ColumnTime-->
+	<select id ="selectClimaticElementFlagTime"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.MeanStationValues">  
+		SELECT t.Stno AS stno, ObsTime AS obsTime, ${column} AS monthlyValue, ${flag} AS flag, ${columnTime} AS columnTime, 
+		StnCName AS stnCName, StnBeginTime AS stnBeginTime,
+		StnEndTime AS stnEndTime
+		From ${table} as t, station
+		WHERE t.Stno = station.Stno
+		AND t.Stno LIKE #{prefix}
+		AND YEAR(ObsTime) = #{year}
+		<![CDATA[
+		AND MONTH(ObsTime)<=#{month}
+		]]>
+		ORDER BY t.Stno
+	</select > 
+	
+	<!--ClimaticElement ColumnTime-->
+	<select id ="selectClimaticElementTime"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.MeanStationValues">  
+		SELECT t.Stno AS stno, ObsTime AS obsTime, ${column} AS monthlyValue, ${columnTime} AS columnTime, StnCName AS stnCName, 
+		StnBeginTime AS stnBeginTime,
+		StnEndTime AS stnEndTime
+		From ${table} as t, station
+		WHERE t.Stno = station.Stno
+		AND t.Stno LIKE #{prefix}
+		AND YEAR(ObsTime) = #{year}
+		<![CDATA[
+		AND MONTH(ObsTime)<=#{month}
+		]]>
+		ORDER BY t.Stno
+	</select > 
+</mapper>

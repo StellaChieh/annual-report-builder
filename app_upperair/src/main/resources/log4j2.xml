@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<Configuration status="warn" name="config">
+	    
+	<Appenders>  
+		<Console name="console" >  
+			<PatternLayout pattern="%highlight{[%-5level]} %d{yyyy-MM-dd HH:mm:ss:SSS} %c{1} - %msg%n"/>  
+		</Console>
+	</Appenders>  
+    
+	<Loggers>  
+		<Root level="info">  
+			<AppenderRef ref="console"/>  
+		</Root>  
+    
+    	<!--給Mybatis印出dao句子。 name=mapper所在的包，level為TRACE-->
+		<Logger name="cwb.cmt.upperair.dao" level="error" additivity="true">  
+			<AppenderRef ref="console"/>  
+		</Logger>
+	</Loggers>  
+	
+</Configuration>  

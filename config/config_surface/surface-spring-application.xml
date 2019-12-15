@@ -1,0 +1,125 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+					    http://www.springframework.org/schema/aop 
+					    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd 
+					    http://www.springframework.org/schema/tx 
+					    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+					    http://www.springframework.org/schema/context 
+					    http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+
+	<!-- Scan the JavaConfig -->
+	<context:component-scan base-package="cwb.cmt.surface.dao;
+										  cwb.cmt.surface.process;
+										  cwb.cmt.surface.service;
+										  cwb.cmt.surface.utils;
+										  "/>
+ 
+	<!--   read config file -->
+	
+	<context:property-placeholder location="config.properties"/>
+	
+	<!--
+	<context:property-placeholder location="D:/work/repo/annual-report-builder/config.properties"/>
+	-->
+	
+	<bean id="rootPath" class="java.lang.String">
+		<constructor-arg value="${cmt.root.path}"/>
+	</bean>
+	
+	<bean id="year" class="java.lang.Integer">
+		<constructor-arg value="${cmt.year}"/>
+	</bean>
+	
+	<bean id="month" class="java.lang.Integer">
+		<constructor-arg value="${cmt.month}"/>
+	</bean>
+	
+	<bean id="kaiuFilePath" class="java.lang.String">
+		<constructor-arg value="${kaiu.path}" />
+	</bean>
+	
+	<bean id="surfaceStnXmlPath" class="java.lang.String">
+		<constructor-arg value="${surface.station.path}" />
+	</bean>
+	<!--Climatic Element-->
+	<bean id="surfaceCeXmlPath" class="java.lang.String">
+		<constructor-arg value="${surface.ce.path}" />
+	</bean>
+
+	<bean id="outputPdfFolder" class="java.lang.String">
+		<constructor-arg value="${surface.output.folder}"/>
+	</bean>
+
+	<bean id="outputTmpPdfPath" class="java.lang.String">
+		<constructor-arg value="${surface.output.tmp.path}"/>
+	</bean>
+	
+	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
+		<property name="mappingLocation" value="${cmt.root.path}\${surface.oxm.mapper.station.path}"/>
+	</bean>
+	
+	<bean id="castorMarshaller2" class="org.springframework.oxm.castor.CastorMarshaller">
+		<property name="mappingLocation" value="${cmt.root.path}\${surface.oxm.mapper.auxclisum.path}"/>
+	</bean>
+	
+	<bean id="castorMarshaller3" class="org.springframework.oxm.castor.CastorMarshaller">
+		<property name="mappingLocation" value="${cmt.root.path}\${surface.oxm.mapper.clisum.path}"/>
+	</bean>
+	
+	<bean id="castorMarshaller4" class="org.springframework.oxm.castor.CastorMarshaller">
+		<property name="mappingLocation" value="${cmt.root.path}\${surface.oxm.mapper.ce.path}"/>
+	</bean>
+	
+	<!--     MyBatis配置     -->
+	<!--配置 sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">    
+		<!-- load mybatis mapper xml -->
+        <property name="mapperLocations">
+         	<list>
+         		<value>${cmt.root.path}\${surface.mybatis.mapper.station.path}</value>
+				<value>${cmt.root.path}\${surface.mybatis.mapper.auxclisum.path}</value>
+				<value>${cmt.root.path}\${surface.mybatis.mapper.clisum.path}</value>
+				<value>${cmt.root.path}\${surface.mybatis.mapper.ce.path}</value>
+         	</list>
+        </property>
+		<!-- load datasource -->
+        <property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- mybatis spring sqlSessionTemplate,使用時直接讓spring注入即可 --> 
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> 
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg> 
+	</bean>
+
+	
+	<!--     HikariCP configuration     -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	    <constructor-arg ref="hikariConfig" />
+	</bean>
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	    <property name="jdbcUrl" value="${cmt.jdbc.url}" />
+	    <property name="username" value="${cmt.jdbc.username}" />
+	    <property name="password" value="${cmt.jdbc.password}" />
+	    <property name="maximumPoolSize" value="30" />
+	    <property name="minimumIdle" value="5" />
+		<property name="autoCommit" value="true" />
+		
+	    <property name="dataSourceProperties">
+	        <props>
+	            <prop key="useServerPrepStmts">true</prop>
+	            <prop key="cachePrepStmts">true</prop>
+	            <prop key="prepStmtCacheSize">250</prop>
+	            <prop key="prepStmtCacheSqlLimit">2048</prop>
+	        </props>
+	    </property>
+	</bean>	
+
+</beans>

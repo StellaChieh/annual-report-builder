@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+<mapper namespace="cwb.cmt.upperair.dao.StandardDao"> 
+
+    <!-- General query interface -->
+    <select id="selectNlhData"  parameterType="HashMap" resultType="cwb.cmt.upperair.model.StandardNlhData">
+        SELECT `Stno` AS stno, `ObsTime` AS time, `Nlh`as nlh
+        FROM  ${airupcode_table}
+        WHERE `Stno` = #{stno} 
+			<![CDATA[
+			AND `ObsTime` >= #{beginTime}
+			AND `ObsTime` < #{endTime}
+			AND HOUR(`ObsTime`) = #{hour}
+			]]>  
+		ORDER BY `ObsTime` ASC;
+		
+    </select>
+    
+    <select id="selectSurfaceData"  parameterType="HashMap" resultType="cwb.cmt.upperair.model.StandardData">
+    	SELECT `Stno` AS stno, `ObsTime` AS time, `Layer` AS layer, `StnPres` AS p, REPLACE(`High`, '/////', '999') AS h, `Tx` AS t, `RH` AS u, 
+        	`Td` AS td, `WD` AS dd, `WS` AS ff 
+		FROM ${airup_table}
+		WHERE `Stno` = #{stno} 
+			<![CDATA[
+			AND `ObsTime` >= #{beginTime}
+			AND `ObsTime` < #{endTime}
+			AND HOUR(`ObsTime`) = #{hour}
+			]]>  
+			AND `Layer` = 1
+		ORDER BY `ObsTime` ASC;
+    </select>
+    
+    
+    <select id="selectStandardLevelsData" parameterType="HashMap"  resultType="cwb.cmt.upperair.model.StandardData">
+    	SELECT `Stno` AS stno, `ObsTime` AS time, `Layer` AS layer, `StnPres` AS p, REPLACE(`High`, '/////', '999') AS h, `Tx` AS t, `RH` AS u, 
+        	`Td` AS td, `WD` AS dd, `WS` AS ff 
+		FROM ${airup_table}
+		WHERE `Stno` = #{stno} 
+			<![CDATA[
+			AND `ObsTime` >= #{beginTime}
+			AND `ObsTime` < #{endTime}
+			AND HOUR(`ObsTime`) = #{hour}
+			]]>   
+			AND `Si` IN (10, 11, 12, 13, 14, 15, 16)
+			AND `StnPres` IN (1000, 925, 850, 700, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30, 20, 10,5)
+		GROUP BY stno, time, p
+		ORDER BY `p` DESC, `ObsTime` ASC;	
+    </select>
+    
+    <select id="selectTropopauseIData" parameterType="HashMap" resultType="cwb.cmt.upperair.model.StandardData">
+    	SELECT a.`Stno` AS stno, a.`ObsTime` AS time, a.`Layer` AS layer, a.`StnPres` AS p, REPLACE(a.`High`, '/////', '999') AS h, 
+    		a.`Tx` AS t, a.`RH` AS u, a.`Td` AS td, a.`WD` AS dd, a.`WS` AS ff 
+    	FROM ${airup_table} a
+		INNER JOIN 
+			(SELECT `Stno`, `ObsTime`, min(`Layer`) Layer, `Si` 
+				FROM ${airup_table}
+				WHERE `Si` = '03' 
+				GROUP BY `ObsTime`, `Stno`) b 
+		ON a.Stno = b.Stno AND a.ObsTime = b.ObsTime AND a.Layer = b.Layer
+		WHERE a.Stno = #{stno} 
+			<![CDATA[
+			AND a.`ObsTime` >= #{beginTime}
+			AND a.`ObsTime` < #{endTime}
+			AND HOUR(a.`ObsTime`) = #{hour}
+			]]>  
+		ORDER BY a.ObsTime ASC;
+    </select>
+    
+    <select id="selectTropopauseIIData" parameterType="HashMap" resultType="cwb.cmt.upperair.model.StandardData">
+		SELECT a.`Stno` AS stno, a.`ObsTime` as time, a.`Layer` AS layer, a.`StnPres` AS p, REPLACE(a.`High`, '/////', '999') AS h,
+			a.`Tx` AS t, a.`RH` AS u, a.`Td` AS td, a.`WD` AS dd, a.`WS` AS ff 
+		FROM ${airup_table} as a 
+		INNER JOIN  (
+			SELECT `Stno`, `ObsTime`, MAX(Layer) as `Layer` 
+			FROM  ${airup_table}
+			<![CDATA[
+            WHERE `Si` = 03 
+				AND `ObsTime` >= #{beginTime} 
+				AND `ObsTime` < #{endTime}
+				AND HOUR(`ObsTime`) = #{hour} 
+				AND `Stno` = #{stno}
+			GROUP BY `ObsTime`, `Stno` 
+			HAVING count(*) > 1 ) as b
+			]]> 
+		on a.`Stno` = b.`Stno` and a.`ObsTime` = b.`ObsTime` and a.`Layer` = b.`Layer` 
+		ORDER BY a.ObsTime ASC;
+	
+	<!-->
+		SELECT a.`Stno` AS stno, a.`ObsTime` AS time, a.`Layer` AS layer, a.`StnPres` AS p, REPLACE(a.`High`, '/////', '999') AS h, 
+    		a.`Tx` AS t, a.`RH` AS u, a.`Td` AS td, a.`WD` AS dd, a.`WS` AS ff 
+		FROM `his_airup` a
+		INNER JOIN 
+		(SELECT `Stno`, `ObsTime`, max(Layer) `Layer` 
+			FROM `his_airup` 
+			WHERE `Si` = 03 AND `ObsTime` 
+				IN   
+				(SELECT `ObsTime` FROM `his_airup` 
+					WHERE `Si` = 03 AND `ObsTime` LIKE #{obsTime} AND `Stno` = #{stno}
+					GROUP BY `ObsTime`, `Stno` HAVING count(*) > 1)
+			GROUP BY `Stno`, `ObsTime`) b
+		ON a.`Stno` = b.`Stno` and a.`ObsTime` = b.`ObsTime` and a.`Layer` = b.`Layer`
+		WHERE a.`Stno` = #{stno}
+		ORDER BY a.ObsTime ASC;
+	<-->
+    </select>
+    
+    <select id="selectlLastLevelData" parameterType="HashMap" resultType="cwb.cmt.upperair.model.StandardData">
+    	SELECT a.`Stno` AS stno, a.`ObsTime` AS time, a.`Layer` AS layer, a.`StnPres` AS p, REPLACE(a.`High`, '/////', '999') AS h, 
+    		a.`Tx` AS t, a.`RH` AS u, a.`Td` AS td, a.`WD` AS dd, a.`WS` AS ff 
+		FROM ${airup_table} a
+		WHERE `Stno` = #{stno} 
+			<![CDATA[
+			AND `ObsTime` >= #{beginTime}
+			AND `ObsTime` < #{endTime}
+			AND HOUR(`ObsTime`) = #{hour}
+			]]>  
+			AND `Si` = '20'
+		ORDER BY a.ObsTime ASC;
+    </select>
+		
+	
+</mapper>
+
+

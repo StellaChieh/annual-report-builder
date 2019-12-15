@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<StationList>
+	<Station>
+		<Stno>466920</Stno>
+		<StnCName>臺北</StnCName>
+	</Station>
+
+	<Station>
+		<Stno>466990</Stno>
+		<StnCName>花蓮</StnCName>
+	</Station>	
+
+	<!-- Sample for surface stations -->
+	<!-- 
+	<Station>
+		<Stno>請放置測站編號，例如"467990"</Stno>
+		<StnCName>請放置測站中文名，例如"馬祖"</StnCName>
+	</Station>
+	-->
+</StationList>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<All-Elements>
+
+    <Element>
+        <Id>stnPres</Id>
+        <TitleChinese>平均測站氣壓</TitleChinese>
+        <TitleEnglish>Mean Station Pressure</TitleEnglish>
+		<Unit chinese="百帕" english="hPa" />
+		<SubstituteZero>false</SubstituteZero>
+		<Flag>None</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>1</NumOfTableRow>
+		<Table name="his_cwbmn">
+			<Column id="stnPres" name="stnPres" prefix="46" statistic-function="AVG" />
+		</Table>
+		<Table name="his_autoprecmn">
+			<Column id="stnPres" name="stnPres" prefix="C0" statistic-function="AVG"/>
+		</Table>
+    </Element>
+
+    <Element>
+        <Id>Tx</Id>
+        <TitleChinese>平均氣溫</TitleChinese>
+        <TitleEnglish>Mean Temp.</TitleEnglish>
+        <Unit chinese="攝氏度" english="°C" />
+		<SubstituteZero>false</SubstituteZero>
+		<Flag>None</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>1</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="Tx" name="Tx" prefix="46" statistic-function="AVG"/>
+		</Table>
+		<Table name="his_autoprecmn">
+		   <Column id="Tx" name="Tx" prefix="C0" statistic-function="AVG"/>
+		</Table> 
+    </Element>
+
+    <Element>
+        <Id>MeanTxMax</Id>
+        <TitleChinese>平均最高氣溫</TitleChinese>
+        <TitleEnglish>Mean Maximum Temp.</TitleEnglish>
+        <Unit chinese="攝氏度" english="°C" />
+		<SubstituteZero>false</SubstituteZero>
+	    <Flag>None</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>1</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="MeanTxMax" name="MeanTxMax" prefix="46" statistic-function="AVG" />
+		</Table>
+    </Element>
+
+	<Element>
+        <Id>TxMaxAbs</Id>
+        <TitleChinese>絕對最高氣溫</TitleChinese>
+        <TitleEnglish>Absolute Maximum Temperature</TitleEnglish>
+        <Unit chinese="攝氏度" english="°C" />
+		<SubstituteZero>False</SubstituteZero>
+		<Flag>None</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>2</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="TxMaxAbs" name="TxMaxAbs" columnTime="TxMaxAbsTime" prefix="46" statistic-function="MAX" />
+		</Table>
+    </Element>
+
+	<Element>
+        <Id>MeanTxMin</Id>
+        <TitleChinese>平均最低氣溫</TitleChinese>
+        <TitleEnglish>Mean Minimum Temp.</TitleEnglish>
+        <Unit chinese="攝氏度" english="°C" />
+		<SubstituteZero>false</SubstituteZero>
+		<Flag>None</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>1</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="MeanTxMin" name="MeanTxMin" prefix="46" statistic-function="AVG"/>
+		</Table>
+    </Element>
+
+	<Element>
+        <Id>TxMinAbs</Id>
+        <TitleChinese>絕對最低氣溫</TitleChinese>
+        <TitleEnglish>Absolute Minimum Temperature</TitleEnglish>
+        <Unit chinese="攝氏度" english="°C" />
+		<SubstituteZero>False</SubstituteZero>
+		<Flag>None</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>2</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="TxMinAbs" name="TxMinAbs" columnTime="TxMinAbsTime" prefix="46" statistic-function="MIN" />
+		</Table>
+    </Element>
+
+	<Element>
+        <Id>RH</Id>
+        <TitleChinese>平均相對濕度</TitleChinese>
+        <TitleEnglish>Mean Relative Humidity</TitleEnglish>
+        <Unit chinese="百分比" english="%" />
+		<SubstituteZero>false</SubstituteZero>
+		<Flag>None</Flag>
+		<Precision>0</Precision>
+		<NumOfTableRow>1</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="RH" name="RH" prefix="46" statistic-function="AVG"/>
+		</Table>
+    </Element>
+
+	<Element>
+        <Id>RHMin</Id>
+        <TitleChinese>最小相對濕度</TitleChinese>
+        <TitleEnglish>Minimum Relative Humidity</TitleEnglish>
+        <Unit chinese="百分比" english="%" />
+		<SubstituteZero>False</SubstituteZero>
+		<Flag>None</Flag>
+		<Precision>0</Precision>
+		<NumOfTableRow>2</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="RHMin" name="RHMin" columnTime="RHMinTime" prefix="46" statistic-function="MIN" />
+		</Table>
+    </Element>
+	
+    <Element>
+        <Id>Precp</Id>
+        <TitleChinese>降水量</TitleChinese>
+        <TitleEnglish>Precipitation</TitleEnglish>
+        <Unit chinese="毫米" english="mm" />
+		<SubstituteZero>True</SubstituteZero>
+		<Flag>Precp_flag</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>1</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="Precp" name="Precp" prefix="46" statistic-function="SUM"/>
+		</Table>
+		<Table name="his_autoprecmn">
+		   <Column id="Precp" name="Precp" prefix="C0" statistic-function="SUM"/>
+		</Table>
+		<Table name="his_autoprecmn">
+		   <Column id="Precp" name="Precp" prefix="C1" statistic-function="SUM"/>
+		</Table>
+    </Element>
+
+    <Element>
+        <Id>PrecpDay</Id>
+        <TitleChinese>降水日數</TitleChinese>
+        <TitleEnglish>Number of Days with Precipitation</TitleEnglish>
+        <Unit chinese="日數" english="day" />
+		<SubstituteZero>True</SubstituteZero>
+		<Flag>PrecpDay_flag</Flag>
+		<Precision>0</Precision>
+		<NumOfTableRow>1</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="PrecpDay" name="PrecpDay" prefix="46" statistic-function="SUM"/>
+		</Table>
+		<Table name="his_autoprecmn">
+		   <Column id="PrecpDay" name="PrecpDay" prefix="C0" statistic-function="SUM"/>
+		</Table>
+		<Table name="his_autoprecmn">
+		   <Column id="PrecpDay" name="PrecpDay" prefix="C1" statistic-function="SUM"/>
+		</Table>
+    </Element>
+
+	<Element>
+        <Id>Precp1DayMax</Id>
+        <TitleChinese>一日最大降水日量</TitleChinese>
+        <TitleEnglish>Maximum Precipitation in One Day</TitleEnglish>
+        <Unit chinese="毫米" english="mm" />
+		<SubstituteZero>True</SubstituteZero>
+		<Flag>Precp1DayMax_flag</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>2</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="Precp1DayMax" name="Precp1DayMax" columnTime="Precp1DayMaxTime" prefix="46" statistic-function="MAX" />
+		</Table>
+		<Table name="his_autoprecmn">
+		   <Column id="Precp1DayMax" name="Precp1DayMax" columnTime="Precp1DayMaxTime" prefix="C0" statistic-function="MAX"/>
+		</Table>
+		<Table name="his_autoprecmn">
+		   <Column id="Precp1DayMax" name="Precp1DayMax" columnTime="Precp1DayMaxTime" prefix="C1" statistic-function="MAX" />
+		</Table>
+    </Element>
+
+    <Element>
+        <Id>Evaporation</Id>
+        <TitleChinese>蒸發量 (A型蒸發器)</TitleChinese>
+        <TitleEnglish>Evaporation (with "A" Type Pan)</TitleEnglish>
+        <Unit chinese="毫米" english="mm" />
+		<SubstituteZero>False</SubstituteZero>
+		<Flag>EvapA_flag</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>1</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="Evaporation" name="EvapA" prefix="46" statistic-function="SUM"/>
+		</Table>
+    </Element>
+
+	<Element>
+        <Id>WSWD</Id>
+        <TitleChinese>平均風速及最多風向</TitleChinese>
+        <TitleEnglish>Mean Wind Speed and Prevailing Wind Direction</TitleEnglish>
+        <Unit chinese="每秒公尺" english="m/sec" />
+		<SubstituteZero>False</SubstituteZero>
+		<Flag>WS_flag</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>2</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="WSWD" name="WS"  prefix="46" statistic-function="AVG" />
+		</Table>
+		<Table name="his_autoprecmn">
+		   <Column id="WSWD" name="WS"  prefix="C0" statistic-function="AVG" />
+		</Table>
+		<Table name="his_cwbmn">
+		   <Column id="WSWD" name="WD"  prefix="46" statistic-function= "MAXCOUNT" />
+		</Table>
+		<Table name="his_autoprecmn">
+		   <Column id="WSWD" name="WD"  prefix="C0" statistic-function="MAXCOUNT"/>
+		</Table>
+    </Element>
+
+	<Element>
+        <Id>MaxWS</Id>
+        <TitleChinese>最大風速</TitleChinese>
+        <TitleEnglish>Maximum Wind Speed</TitleEnglish>
+        <Unit chinese="每秒公尺" english="m/sec" />
+		<SubstituteZero>False</SubstituteZero>
+		<Flag>WSMax_flag</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>2</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="MaxWS" name="WSMax" columnTime="WMaxTime" prefix="46" statistic-function="MAX" />
+		</Table>
+		<Table name="his_cwbmn">
+		   <Column id="MaxWS" name="WDMax" columnTime="WMaxTime" prefix="46" statistic-function= "MAX" />
+		</Table>
+    </Element>
+
+	<Element>
+        <Id>MaxWSGust</Id>
+        <TitleChinese>最大陣風風速</TitleChinese>
+        <TitleEnglish>Gust</TitleEnglish>
+        <Unit chinese="每秒公尺" english="m/sec" />
+		<SubstituteZero>False</SubstituteZero>
+		<Flag>WSGust_flag</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>2</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="MaxWSGust" name="WSGust" columnTime="WGustTime"  prefix="46" statistic-function="MAX" />
+		</Table>
+		<Table name="his_cwbmn">
+		   <Column id="MaxWSGust" name="WDGust" columnTime="WGustTime" prefix="46" statistic-function= "MAX" />
+		</Table>
+    </Element>	
+
+    <Element>
+        <Id>CloudAmountMean</Id>
+        <TitleChinese>平均雲量</TitleChinese>
+        <TitleEnglish>Mean Cloud Amount</TitleEnglish>
+        <Unit chinese="十分比" english="＃/10" />
+		<SubstituteZero>False</SubstituteZero>
+		<Flag>None</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>1</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="CloudAmountMean" name="CAmtMean" prefix="46" statistic-function="AVG" />
+		</Table>
+    </Element>
+
+    <Element>
+        <Id>SunshineDuration</Id>
+        <TitleChinese>日照時數</TitleChinese>
+        <TitleEnglish>Sunshine Duration</TitleEnglish>
+        <Unit chinese="小時" english="hours" />
+		<SubstituteZero>False</SubstituteZero>
+		<Flag>SunShine_flag</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>1</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="SunshineDuration" name="SunShine" prefix="46" statistic-function="SUM"/>
+		</Table>
+    </Element>
+	
+    <Element>
+        <Id>GlobalSolarRadiation</Id>
+        <TitleChinese>全天空日射量</TitleChinese>
+        <TitleEnglish>Global Solar Radiation</TitleEnglish>
+        <Unit chinese="每平方公尺百萬焦耳" english="MJ/㎡" />
+		<SubstituteZero>False</SubstituteZero>
+		<Flag>GloblRad_flag</Flag>
+		<Precision>1</Precision>
+		<NumOfTableRow>1</NumOfTableRow>
+		<Table name="his_cwbmn">
+		   <Column id="GlobalSolarRadiation" name="GloblRad" prefix="46" statistic-function="SUM"/>
+		</Table>
+    </Element>
+
+	<!-- Sample for surface climatic elements -->
+	<!--
+	<Element>
+		<Id>唯一的氣象要素名，不和其他氣象要素ID撞名，例如，'stnPres'，設定好後請勿再更動</Id>
+        <TitleChinese>此氣象要素的中文標題名，例如，'平均測站氣壓'</TitleChinese>
+        <TitleEnglish>此氣象要素的英文標題名，例如，'Mean Station Pressure'</TitleEnglish>
+        <Unit chinese="中文單位名" english="英文單位名" />
+		<SubstituteZero>當數值為零時是否要以'-'表示？是填'True', 否填'False'</SubstituteZero>
+		<Flag>填入此氣象要素缺值的判斷標籤，例如，'日照時數'的缺值判斷標籤為'SunShine_flag'，若無，則填'None'</Flag>
+		<Precision>表格中數值要算到哪一位？'0'表示整數位，'1'表示小數第一位，依此類推</Precision>
+		<NumOfTableRow>此氣象要素單一表格所需的列數</NumOfTableRow>
+		<Table name="此氣象要素使用的資料表名稱，例如，欲查詢當年度的年報填入cwbmn，欲查詢過去年度的年報則填入his_cwbmn">
+		   <Column id="氣象要素名稱與<Id>相同" name="資料表取的欄位名稱，例如，stnPres" prefix="測站編號字首，例如，46" statistic-function="數值統計方式，例如，SUM"/>
+		</Table>
+	</Element>
+	-->
+
+</All-Elements>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+<mapper namespace="cwb.cmt.summary.dao.StnMovesDao"> 
+
+	<select id="selectStnMoves" resultType="cwb.cmt.summary.model.StnMoves">
+        SELECT a.*, b.StnCName, b.StnEName
+        FROM summary_stnmove a
+		LEFT JOIN station b
+			on a.Stno = b.Stno
+    </select>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+					    http://www.springframework.org/schema/aop 
+					    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd 
+					    http://www.springframework.org/schema/tx 
+					    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+					    http://www.springframework.org/schema/context 
+					    http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+<!-- 	<context:annotation-config/> -->
+	<!-- Scan the JavaConfig -->
+	<context:component-scan base-package="cwb.cmt.summary.composeData,
+										  cwb.cmt.summary.config,
+										  cwb.cmt.summary.dao,
+										  cwb.cmt.summary.process,
+										  cwb.cmt.summary.service,
+										  cwb.cmt.summary.createTableImage" />
+<!--   引入配置文件     --> 
+<!--   read config file -->
+	<!-- jar environment -->
+	<context:property-placeholder location="config.properties"/> 
+	
+	<!-- IDE environment
+	<context:property-placeholder location="D:/work/repo/annual-report-builder/config.properties"/>
+	-->
+	<bean id="rootPath" class="java.lang.String">
+		<constructor-arg value="${cmt.root.path}"/>
+	</bean>
+	
+	<bean id="year" class="java.lang.Integer">
+		<constructor-arg value="${cmt.summary.year}"/>
+	</bean>
+	
+	<bean id="kaiuFilePath" class="java.lang.String">
+		<constructor-arg value="${kaiu.path}" />
+	</bean>
+	
+	<bean id="summarystationXmlConfigPath" class="java.lang.String">
+		<constructor-arg value="${summary.station.path}" />
+	</bean>
+	
+	<bean id="summaryClimaticElementXmlConfigPath" class="java.lang.String">
+		<constructor-arg value="${summary.ce.path}" />
+	</bean>
+
+	<bean id="outputPdfFilename" class="java.lang.String">
+		<constructor-arg value="${summary.pdf.filename}"/>
+	</bean>
+	
+	<bean id="outputFolder" class="java.lang.String">
+		<constructor-arg value="${summary.output.folder}"/>
+	</bean>
+
+	<bean id="outputTmpPdfPath" class="java.lang.String">
+		<constructor-arg value="${summary.output.tmp.path}"/>
+	</bean>
+	
+<!--     MyBatis配置     -->
+	
+	<!--配置 sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">    
+		<!-- 加载mybatis的配置文件 -->
+        <property name="mapperLocations">
+         	<list>
+				<value>${cmt.root.path}\${summary.mybatis.mapper.summary.path}</value>
+				<value>${cmt.root.path}\${summary.mybatis.mapper.mn.path}</value>
+         		<value>${cmt.root.path}\${summary.mybatis.mapper.inityear.path}</value>
+				<value>${cmt.root.path}\${summary.mybatis.mapper.station.path}</value>
+				<value>${cmt.root.path}\${summary.mybatis.mapper.stnmoves.path}</value>
+         	</list>
+        </property>
+		<!-- 加载数据源 -->
+        <property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="cwb.cmt.summary.dao" />
+	</bean>
+	
+	
+	<!-- mybatis spring sqlSessionTemplate,使用時直接讓spring注入即可 --> 
+	<!--
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> 
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg> 
+	</bean>
+	-->
+	
+	
+<!--     HikariCP configuration     -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	    <constructor-arg ref="hikariConfig" />
+	</bean>
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	    <property name="jdbcUrl" value="${cmt.jdbc.url}" />
+	    <property name="username" value="${cmt.jdbc.username}" />
+	    <property name="password" value="${cmt.jdbc.password}" />
+	    <property name="maximumPoolSize" value="30" />
+	    <property name="minimumIdle" value="5" />
+		<property name="autoCommit" value="true" />
+	    <property name="dataSourceProperties">
+	        <props>
+	            <prop key="useServerPrepStmts">true</prop>
+	            <prop key="cachePrepStmts">true</prop>
+	            <prop key="prepStmtCacheSize">250</prop>
+	            <prop key="prepStmtCacheSqlLimit">2048</prop>
+	        </props>
+	    </property>
+	</bean>
+</beans>

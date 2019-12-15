@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+<mapper namespace="cwb.cmt.summary.dao.SummaryDao"> 
+
+	<select id="selectDbSummary" parameterType="java.util.HashMap" resultType="cwb.cmt.summary.model.SummaryModel">
+        SELECT *  
+        FROM summary
+        WHERE stno = #{stno} 
+        	AND climaticElement = #{climaticElement}
+    </select>
+    
+    <select id="selectOneDbSummary" parameterType="java.util.HashMap" resultType="cwb.cmt.summary.model.SummaryModel">
+        SELECT *  
+        FROM summary
+        WHERE stno = #{stno}
+        	AND climaticElement = #{climaticElement}
+        	AND no = #{no}  
+    </select>
+	
+	<insert id ="insert"  parameterType ="java.util.List" >  
+	        INSERT INTO summary
+	 		VALUES
+	    <foreach collection="list" item="element" index="index"  separator="," >
+			(#{element.no}, #{element.stno}, #{element.climaticElement}, #{element.beginYear}, #{element.endYear}
+			, #{element.jan}, #{element.feb}, #{element.mar}
+			, #{element.apr}, #{element.may}, #{element.jun}
+			, #{element.jul}, #{element.aug}, #{element.sep}
+			, #{element.oct}, #{element.nov}, #{element.dec}
+			, #{element.summary})
+	    </foreach>
+	</insert > 
+	
+	<delete id="clear" >
+		delete from summary
+	</delete>
+	
+</mapper>
+
+

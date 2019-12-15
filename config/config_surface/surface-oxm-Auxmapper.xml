@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+                         "http://castor.org/mapping.dtd">
+
+<mapping>
+  <class name="cwb.cmt.surface.model.AuxCliSumList"> 
+  <!--connect to surface-station.xml <StationList> tag-->
+	<map-to xml="StationList"/>
+	<!--connect to AuxCliSumList.java-->
+	<field name="auxclisumStns"	type="cwb.cmt.surface.model.AuxCliSum"  collection="vector">
+      <bind-xml name="Station"/>
+    </field>
+  </class>
+  
+  <class name="cwb.cmt.surface.model.AuxCliSum">
+	<field name="stno" type="java.lang.String">
+		<bind-xml name="Stno" node="element"/>
+	</field>
+	
+	<field name="stnCName" type="java.lang.String">
+      <bind-xml name="StnCName" node="element"/>
+    </field>
+  </class>
+ 
+</mapping>

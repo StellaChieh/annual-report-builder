@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!--
+    <properties resource="config.properties"/>
+    -->
+     
+    <!-- file:./  代表目前位置    IDE environment-->
+    <!--
+    <properties url="file:./../config.properties"/>
+    -->
+    <!-- jar environment -->
+	<properties url="file:./config.properties"/> 
+	
+	
+	<settings>
+		<!-- 關閉快取 -->
+		<setting name="cacheEnabled" value="false" />
+		
+		<!-- 讓table欄位與javaBean屬性自動對應   ex:col_first => colFirst -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		
+		<!-- 關閉LazyLoading -->
+		<setting name="aggressiveLazyLoading" value="false" />
+	</settings>
+	
+	<!-- 設定所使用的 javaBean(掃package) -->
+	<typeAliases>
+	  <package name="entity" />
+	</typeAliases>
+	
+	<!-- 設定連線資訊 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" /><!-- transaction設定(需再研究) -->
+            <dataSource type="POOLED">
+            	<property name="driver" value="${cmt.jdbc.driver}"/>
+            	<property name="url" value="${cmt.jdbc.url}"/>
+            	<property name="username" value="${cmt.jdbc.username}"/>
+            	<property name="password" value="${cmt.jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    
+    <!-- 設定所使用的SQL mapper 的xml檔 -->
+    <mappers>
+    	<mapper resource="mapper/WindRoseMapper.xml"/>
+<!--         <package name="mapper" /> -->
+    </mappers>
+
+</configuration>

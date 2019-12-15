@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+<mapper namespace="cwb.cmt.summary.dao.HisCwbmnDao">
+ 
+	<select id="querySingleYearMonthlyData" parameterType = "java.util.HashMap" resultType="cwb.cmt.summary.model.MonthlyData">
+	     SELECT stno, ${selectQuery}
+		 FROM ${table} 
+		 WHERE Stno = #{stno} 
+			AND YEAR(ObsTime) BETWEEN #{beginYear} AND #{endYear} 
+			AND MONTH(ObsTime) = #{month}
+    </select>	
+	    
+    <select id="querySpanYearsData" parameterType = "java.util.HashMap" resultType="cwb.cmt.summary.model.MonthlyData">
+	     SELECT stno, ${selectQuery} 
+		 FROM ${table} 
+		 WHERE Stno = #{stno} 
+			AND YEAR(ObsTime) BETWEEN #{beginYear} AND #{endYear} 
+			AND MONTH(ObsTime) = #{month}
+    </select>
+    
+    <select id="queryEvapAMax" parameterType = "java.util.HashMap" resultType="cwb.cmt.summary.model.MonthlyData">
+		Select stno, EvapA AS fv, ObsTime AS t  
+		FROM `his_cwbdy` 
+		Where stno = #{stno}
+			AND Month(ObsTime) = #{month} 
+			AND Year(ObsTime) BETWEEN #{beginYear} AND #{endYear}
+			AND ObsTime is not null
+		ORDER BY EvapA DESC
+		LIMIT 1
+    </select>
+    
+</mapper>
+
+

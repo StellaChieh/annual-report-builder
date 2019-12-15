@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="618.0" prefWidth="1300.0" stylesheets="@../css/bootstrap3.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cwb.cmt.view.controller.SettingViewController">
+  <children>
+     <Label layoutX="17.0" layoutY="135.0" text="參數設定" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="135.0" />
+     <Separator layoutY="163.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="163.0" />
+     <GridPane layoutX="27.0" layoutY="184.0" prefHeight="395.0" prefWidth="799.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="184.0">
+       <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" maxWidth="318.0" minWidth="10.0" prefWidth="191.0" />
+         <ColumnConstraints hgrow="SOMETIMES" maxWidth="877.0" minWidth="10.0" prefWidth="877.0" />
+         <ColumnConstraints hgrow="SOMETIMES" maxWidth="707.0" minWidth="10.0" prefWidth="44.0" />
+       </columnConstraints>
+       <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+       </rowConstraints>
+        <children>
+           <Label prefHeight="24.0" prefWidth="228.0" text="地面高空報表年月(yyyy-mm)" />
+           <Label text="地面檔案放置資料夾" GridPane.rowIndex="2" />
+           <Label text="高空檔案放置資料夾" GridPane.rowIndex="3" />
+           <Label text="彙編檔案放置資料夾" GridPane.rowIndex="4" />
+           <Button mnemonicParsing="false" onAction="#onSurfacePath" prefHeight="31.0" prefWidth="79.0" styleClass="info" text="選擇路徑" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+           <Button mnemonicParsing="false" onAction="#onUpperairPath" styleClass="info" text="選擇路徑" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+           <Button mnemonicParsing="false" onAction="#onSummaryPath" styleClass="info" text="選擇路徑" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextField fx:id="summaryPath" prefHeight="85.0" prefWidth="478.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="upperairPath" prefHeight="38.0" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="surfacePath" prefHeight="38.0" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="rptYear" prefHeight="38.0" prefWidth="469.0" GridPane.columnIndex="1" />
+            <Label text="彙編報表年份(起始年)" GridPane.rowIndex="1" />
+            <TextField fx:id="summaryYear" prefHeight="38.0" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="IP位置(MySql)" GridPane.rowIndex="5" />
+            <TextField fx:id="ip" prefHeight="85.0" prefWidth="478.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="使用者帳號" GridPane.rowIndex="6" />
+            <Label prefHeight="24.0" prefWidth="99.0" text="密碼" GridPane.rowIndex="7" />
+            <TextField fx:id="account" prefHeight="38.0" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        </children>
+     </GridPane>
+      <GridPane layoutX="31.0" layoutY="73.0" prefHeight="38.0" prefWidth="799.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="718.0" minWidth="10.0" prefWidth="223.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="646.0" minWidth="10.0" prefWidth="576.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="21.0" prefWidth="165.0" text="彙編寫入中繼資料表" />
+            <Button mnemonicParsing="false" onAction="#onSmyDbBtn" prefHeight="31.0" prefWidth="76.0" styleClass="info" text="寫入" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <Label layoutX="17.0" layoutY="22.0" text="中繼資料表" />
+      <Separator layoutX="-1.0" layoutY="46.0" prefHeight="13.0" prefWidth="860.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0" />
+      <Button layoutX="252.0" layoutY="130.0" mnemonicParsing="false" onAction="#onSave" prefHeight="31.0" prefWidth="79.0" styleClass="info" text="儲存變更" />
+  </children>
+</AnchorPane>

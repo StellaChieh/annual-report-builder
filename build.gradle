@@ -1,0 +1,74 @@
+/*
+Build sub-projects:
+gradle -Pbuildmode=fatjar :app_surface:build
+gradle -Pbuildmode=fatjar :app_summary:build
+gradle -Pbuildmode=fatjar :app_upperair:build
+gradle -Pbuildmode=fatjar :windRose:build
+*/
+
+plugins {
+	id "com.github.johnrengelman.shadow" version "5.1.0"
+	id "java"
+}
+
+allprojects {
+	apply plugin: "java"
+	apply plugin: "eclipse"
+
+	compileJava.options.encoding = 'UTF-8'
+	compileTestJava.options.encoding = 'UTF-8'
+
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		maven {
+			url "https://repository.apache.org/content/repositories/snapshots/"
+		}
+	}
+}
+
+dependencies {
+	compile project('app_interface')
+}
+
+shadowJar {
+	baseName = 'cmt_annual_report_builder'
+	version =  "2.0.0"
+
+	mergeServiceFiles {
+		include 'META-INF/spring.*'
+	}
+}
+
+jar {
+	manifest {
+		attributes("Main-Class": "cwb.cmt.view.application.Main")
+	}
+}
+
+task myCopy(type: Copy) {	
+	into "${buildDir}/toArchive"
+	from ("${rootDir}"){
+		include "config/**"
+	}
+	from ("report.bat")
+	from ("config.properties")
+	from (shadowJar)
+}
+
+task myZip(type: Zip) {
+	from "${buildDir}/toArchive"
+	archiveName = 'annualReport.zip'
+	destinationDir = file("${buildDir}/dist")
+}
+
+task myProduce {
+	dependsOn 'clean'
+	dependsOn 'myCopy'
+	dependsOn 'myZip'
+	tasks.findByName('myCopy').mustRunAfter 'clean'
+	tasks.findByName('myZip').mustRunAfter 'myCopy'
+}

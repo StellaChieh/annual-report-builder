@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1300.0" stylesheets="@../css/bootstrap3.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cwb.cmt.view.controller.GSummaryRptViewController">
+               <children>
+                  <GridPane layoutY="88.0" prefHeight="296.0" prefWidth="1159.0" AnchorPane.leftAnchor="88.0" AnchorPane.topAnchor="88.0">
+                     <children>
+                        <Label text="1. 封面" />
+                        <Label text="2. 凡例" GridPane.rowIndex="1" />
+                        <Label text="3. Introduction" GridPane.rowIndex="2" />
+                        <TextField fx:id="cover" GridPane.columnIndex="2" />
+                        <TextField fx:id="example" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="introduction" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Label text="4. 版權頁" GridPane.rowIndex="3" />
+                        <TextField fx:id="copyright" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <Button mnemonicParsing="false" onAction="#onSummaryCopy" styleClass="info" text="選擇檔案" GridPane.columnIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#onSummaryExample" styleClass="info" text="選擇檔案" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#onSummaryIntroduction" styleClass="info" text="選擇檔案" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" onAction="#onSummaryCopyright" styleClass="info" text="選擇檔案" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="501.0" minWidth="10.0" prefWidth="133.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="481.0" minWidth="10.0" prefWidth="107.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="944.0" minWidth="10.0" prefWidth="943.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <Button layoutX="1169.0" layoutY="402.0" mnemonicParsing="false" onAction="#onGenerateSummaryReportBtn" styleClass="info" text="產製PDF" />
+                  <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+                  <Label layoutX="20.0" layoutY="23.0" text="上傳要合併的PDF檔" />
+               </children></AnchorPane>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+                         "http://castor.org/mapping.dtd">
+
+<mapping>
+
+  <class name="cwb.cmt.surface.model.CeList">
+    <!--connect to surface-climaticelement.xml <CeList> tag-->
+	<map-to xml="All-Elements"/>
+	<!--connect to CeList.java-->
+	<field name="ce"  type="cwb.cmt.surface.model.ClimaticElement"  collection="vector">
+      <bind-xml name="Element"/>
+	</field>
+  </class>
+  
+  <class name="cwb.cmt.surface.model.ClimaticElement">
+	
+    <field name="id" type="java.lang.String">
+      <bind-xml name="Id" node="element"/>
+    </field>
+	
+	<field name="chineseTitle" type="java.lang.String">
+      <bind-xml name="TitleChinese" node="element"/>
+    </field>
+	
+	<field name="englishTitle" type="java.lang.String">
+      <bind-xml name="TitleEnglish" node="element"/>
+    </field>
+	
+	<field name="chineseUnit" type="java.lang.String" >
+      <bind-xml name="chinese" node="attribute" location="Unit" />
+    </field>
+	
+	<field name="englishUnit" type="java.lang.String" >
+      <bind-xml name="english" node="attribute" location="Unit" />
+    </field>
+	
+	<field name="substituteZero" type="java.lang.Boolean" >
+      <bind-xml name="SubstituteZero" node="element"/>
+    </field>
+	
+	<field name="flag" type="java.lang.String">
+      <bind-xml name="Flag" node="element"/>
+    </field>
+	
+	<!--Table tag-->
+	<field name="tables" type="cwb.cmt.surface.model.CeTables" collection="vector">
+		<bind-xml name="Table"/>
+	</field>
+	<field name="precision" type="java.lang.String">
+      <bind-xml name="Precision" node="element"/>
+    </field>
+	<field name="numOfTableRow" type="java.lang.String">
+      <bind-xml name="NumOfTableRow" node="element"/>
+    </field>
+  </class>
+  
+  
+  <class name="cwb.cmt.surface.model.CeTables">
+  
+	<field name="tableName" type="java.lang.String">
+      <bind-xml name="name" node="attribute" />
+    </field>
+	
+	<field name="columnId" type="java.lang.String">
+      <bind-xml name="id" node="attribute" location="Column" />
+    </field>
+	
+    <field name="columnName" type="java.lang.String">
+      <bind-xml name="name" node="attribute" location="Column" />
+    </field>
+	
+	<field name="columnTime" type="java.lang.String">
+      <bind-xml name="columnTime" node="attribute" location="Column" />
+    </field>
+	
+	<field name="stnPrefix" type="java.lang.String">
+      <bind-xml name="prefix" node="attribute" location="Column" />
+    </field>
+	
+	<field name="statisticFunction" type="java.lang.String">
+      <bind-xml name="statistic-function" node="attribute" location="Column" />
+    </field>
+
+  </class>
+  
+</mapping>

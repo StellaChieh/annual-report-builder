@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" stylesheets="@../css/bootstrap3.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cwb.cmt.view.controller.MyController">
+  <tabs>
+    <Tab fx:id="settingTab" text="設定">
+       <content>
+       	<fx:include fx:id="settingView" source="settingView.fxml" />
+       </content>
+    </Tab>
+    <Tab fx:id="gSurfaceRptTab" text="產製地面報表">
+      <content>
+      	<fx:include fx:id="gSurfaceRptView" source="gSurfaceRptView.fxml" />
+      </content>
+    </Tab>
+    <Tab fx:id="gUpperairRptTab" text="產製高空報表">      
+      <content>
+      	<fx:include fx:id="gUpperairRptView" source="gUpperairRptView.fxml" />
+      </content>
+    </Tab>
+      <Tab fx:id="gSummaryRptTab" text="產製彙編報表">
+        <content>
+          <fx:include fx:id="gSummaryRptView" source="gSummaryRptView.fxml" />
+        </content>
+      </Tab>
+      <!-->
+	  <Tab fx:id="gSubRptTab" text="產製部分報表">
+        <content>
+          <fx:include fx:id="gSubRptView" source="gSubRptView.fxml" />
+        </content>
+      </Tab>
+	  <-->
+      <Tab fx:id="changeConfigTab" text="修改版面">
+        <content>
+        	<fx:include fx:id="changeConfigView" source="changeConfigView.fxml" />
+        </content>
+      </Tab>
+	  <!-->
+      <Tab text="說明">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextFlow fx:id="description" layoutX="2.0" layoutY="1.0" prefHeight="631.0" prefWidth="939.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+	  <!-->
+  </tabs>
+</TabPane>

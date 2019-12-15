@@ -1,0 +1,150 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+					    http://www.springframework.org/schema/aop 
+					    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd 
+					    http://www.springframework.org/schema/tx 
+					    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+					    http://www.springframework.org/schema/context 
+					    http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+
+	<!-- Scan the JavaConfig -->
+	<context:component-scan base-package="cwb.cmt.upperair.main;
+										  cwb.cmt.upperair.dao;
+										  cwb.cmt.upperair.process;
+										  cwb.cmt.upperair.dataProcess;
+										  cwb.cmt.upperair.createImage;
+										  cwb.cmt.upperair.utils" />
+ 
+	<!--   read config file -->
+	<!--run from bat-->
+	<!--
+	<context:property-placeholder location="config.properties"/> 
+	-->
+	<!--run from ide-->
+	
+	<context:property-placeholder location="D:/work/repo/annual-report-builder/config.properties"/>
+	
+	
+	<bean id="rootPath" class="java.lang.String">
+		<constructor-arg value="${cmt.root.path}"/>
+	</bean>
+	
+	<bean id="year" class="java.lang.Integer">
+		<constructor-arg value="${cmt.year}"/>
+	</bean>
+	
+	<bean id="month" class="java.lang.Integer">
+		<constructor-arg value="${cmt.month}"/>
+	</bean>
+	
+	<bean id="kaiuFilePath" class="java.lang.String">
+		<constructor-arg value="${kaiu.path}" />
+	</bean>
+	
+	<bean id="upperairStationXmlConfigPath" class="java.lang.String">
+		<constructor-arg value="${upperair.station.path}" />
+	</bean>
+
+	<bean id="outputTmpPdfPath" class="java.lang.String">
+		<constructor-arg value="${upperair.output.tmp.path}"/>
+	</bean>
+	
+	<bean id="outputFolder" class="java.lang.String">
+		<constructor-arg value="${upperair.output.folder}"/>
+	</bean>
+	
+	<bean id="pdfFilename" class="java.lang.String">
+		<constructor-arg value="${upperair.pdf.filename}"/>
+	</bean>
+	
+	<bean id="csvStandardFilename" class="java.lang.String">
+		<constructor-arg value="${upperair.csv.standard.filename}"/>
+	</bean>
+	
+	<bean id="csvTropFilename" class="java.lang.String">
+		<constructor-arg value="${upperair.csv.troppopause.filename}"/>
+	</bean>
+	
+	<bean id="csvLastFilename" class="java.lang.String">
+		<constructor-arg value="${upperair.csv.last.filename}"/>
+	</bean>
+	
+	<bean id="csvSignificantFilename" class="java.lang.String">
+		<constructor-arg value="${upperair.csv.significant.filename}"/>
+	</bean>
+
+
+		
+	<!-- spring casTorMarshaller oxm 配置-->	
+	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
+		<property name="mappingLocation" value="${cmt.root.path}\${upperair.oxm.mapper.station.path}"/>
+	</bean>
+	
+	
+	<!--     MyBatis配置     -->
+	<!--配置 sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">    
+		<!-- load mybatis mapper xml -->
+        <property name="mapperLocations">
+         	<list>
+         		<value>${cmt.root.path}\${upperair.mybatis.mapper.significantLevels.path}</value>
+         		<value>${cmt.root.path}\${upperair.mybatis.mybatis.mapper.standardLevels.path}</value>
+         		<value>${cmt.root.path}\${upperair.mybatis.mybatis.mapper.station.path}</value>
+         	</list>
+        </property>
+		<!-- load datasource -->
+        <property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 讓stationDao代理mapperFactoryBean。注入sqlSessionFactory到mapperFactoryBean，讓spring管理session open, close, rollback等等
+	<bean id="stationDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cwb.cmt.upperair.dao.StationDao"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	-->
+	
+	<!-- 上面那個方法要一個一個mapper註冊，可以用MapperScannerConfigurer掃描mapper包類，
+			一次性全部註冊。註冊的Bean以類名稱依spring命名慣例命名。-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="cwb.cmt.upperair.dao" />
+	</bean>
+	
+	<!-- mybatis spring sqlSessionTemplate,使用時直接讓spring注入即可。因為還要多寫編碼，不用這個方法 
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> 
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg> 
+	</bean>
+	--> 
+	
+	<!--     HikariCP configuration     -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	    <constructor-arg ref="hikariConfig" />
+	</bean>
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	    <property name="jdbcUrl" value="${cmt.jdbc.url}" />
+	    <property name="username" value="${cmt.jdbc.username}" />
+	    <property name="password" value="${cmt.jdbc.password}" />
+	    <property name="maximumPoolSize" value="30" />
+	    <property name="minimumIdle" value="5" />
+		<property name="autoCommit" value="true" />		
+	    <property name="dataSourceProperties">
+	        <props>
+	            <prop key="useServerPrepStmts">true</prop>
+	            <prop key="cachePrepStmts">true</prop>
+	            <prop key="prepStmtCacheSize">250</prop>
+	            <prop key="prepStmtCacheSqlLimit">2048</prop>
+	        </props>
+	    </property>
+	</bean>	
+
+</beans>
+
+
+

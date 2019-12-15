@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+<!--mapper namespace="cwb.cmt.surface.dao.AuxCliSumDao"--> 
+<mapper namespace="cwb.cmt.surface.dao.AuxCliSumDao"> 
+	<!--Radiation and SunShine-->
+	<select id ="selectRadSun"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.AuxCliSum">  
+			SELECT t.Stno AS stno, ObsTime As obstime, GloblRad AS globalRad, SunShine AS sunshine
+			<!--From his_cwbdy-->
+			FROM ${table} as t
+			WHERE Year(ObsTime)= #{year} and Stno in
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>
+	</select > 
+	
+	<!--Global Solar Radiation-->
+	<select id ="selectGlobalRad"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.AuxCliSum">  
+			SELECT Stno AS stno, ObsTime As obstime, GloblRad AS globalRad, GloblRad_flag AS globlRad_flag
+			<!--From his_cwbmn-->
+			FROM ${table}
+			WHERE Year(ObsTime)= #{year} and Stno in
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>
+	</select > 
+	
+	<!--Radiation Max-->
+	<select id ="selectRadMax"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.AuxCliSum">  
+			SELECT Stno AS stno, ObsTime As obstime, GloblRadHrMax AS globalRadMax,
+			t.GloblRadHrMaxTime AS globalRadHrMaxTime
+			<!--From his_cwbmn-->
+			FROM ${table} as t
+			WHERE Year(ObsTime)= #{year} and Stno in
+		<foreach collection="stnList" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}, #{element.month}
+	    </foreach>	
+	</select > 
+</mapper>

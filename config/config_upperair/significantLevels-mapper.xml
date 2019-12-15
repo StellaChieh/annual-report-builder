@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+<mapper namespace="cwb.cmt.upperair.dao.SignificantDao"> 
+	
+	<select id="selectSignificantLevelsData" parameterType="HashMap" resultType="cwb.cmt.upperair.model.SignificantData">
+    	SELECT a.`Stno` AS stno, a.`ObsTime` AS time, a.`Layer` AS layer, a.`StnPres` AS p, REPLACE(a.`High`, '/////', '999') AS h, 
+    			a.`Tx` AS t, a.`RH` AS u, a.`WD` AS dd, a.`WS` AS ff 
+    	FROM ${table} a 
+    	WHERE a.`stno` = #{stno} 
+			<![CDATA[
+			AND a.`obsTime` >= #{beginTime}
+			AND	a.`obsTime` < #{endTime}
+			AND	HOUR(a.`obsTime`) = #{hour} 
+			AND a.`si` IN ('02', '03', '19', '20') 
+			AND 36 > ( SELECT count(*) 
+						FROM ${table} b 
+						WHERE b.`si` IN ('02', '03', '19', '20') 
+							AND a.`stno` = b.`stno` 
+							AND a.`obstime` = b.`obstime` 
+							AND b.`layer` < a.`layer`) 
+			]]>   
+		ORDER BY a.`stno` ASC, a.`obstime` ASC, a.`layer` ASC;
+    </select>
+		
+</mapper>
+
+

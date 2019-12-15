@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="462.0" prefWidth="735.0" stylesheets="@../css/bootstrap3.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cwb.cmt.view.controller.GSubRptViewController">
+   <children>
+      <Separator layoutX="239.0" orientation="VERTICAL" prefHeight="200.0" stylesheets="@../css/bootstrap3.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Separator layoutX="481.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label layoutX="91.0" layoutY="35.0" text="地面" />
+      <Label layoutX="332.0" layoutY="35.0" text="高空" />
+      <Label layoutX="590.0" layoutY="35.0" text="彙編" />
+      <VBox layoutX="14.0" layoutY="115.0" prefHeight="200.0" prefWidth="210.0">
+         <children>
+            <CheckBox mnemonicParsing="false" text="基本氣象綱要表" />
+            <CheckBox mnemonicParsing="false" stylesheets="@../css/bootstrap3.css" text="輔助氣候綱要表" />
+            <CheckBox mnemonicParsing="false" text="綜觀及自動觀測站年表" />
+         </children>
+      </VBox>
+      <Button layoutX="70.0" layoutY="356.0" mnemonicParsing="false" styleClass="info" text="產製報表" />
+      <VBox layoutX="286.0" layoutY="115.0" prefHeight="200.0" prefWidth="142.0">
+         <children>
+            <CheckBox mnemonicParsing="false" text="台北板橋" />
+            <CheckBox mnemonicParsing="false" text="花蓮" />
+         </children>
+      </VBox>
+      <Button layoutX="318.0" layoutY="356.0" mnemonicParsing="false" styleClass="info" text="產製報表" />
+   </children>
+</AnchorPane>

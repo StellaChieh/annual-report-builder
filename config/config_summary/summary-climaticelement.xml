@@ -1,0 +1,896 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ClimaticElements>
+	
+	<ClimaticElement>
+		<Id>SeaPres</Id>
+		<ChineseName>海平面平均氣壓</ChineseName>
+		<EnglishName>Mean Pressure at Sea Level</EnglishName>
+		<Unit>hPa</Unit>
+		<ContentsGroup>1</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>seaPresMean</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>SeaPres</DbColumn>
+			<SpecialNumber number="-9999.5" symbol="X"/>
+			<SpecialNumber number="-9999.7" symbol="#"/> 
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+
+	<ClimaticElement>
+		<Id>StnPres</Id>
+		<ChineseName>測站平均氣壓</ChineseName>
+		<EnglishName>Mean Pressure at station</EnglishName>
+		<Unit>hPa</Unit>
+		<ContentsGroup>1</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>mean</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>StnPres</DbColumn>
+			<SpecialNumber number="-9999.5" symbol="X"/>
+			<SpecialNumber number="-9999.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>StnPresMax</Id>
+		<ChineseName>測站最高氣壓</ChineseName>
+		<EnglishName>Maximum Pressure at station</EnglishName>
+		<Unit>hPa</Unit>
+		<ContentsGroup>1</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>2</NumOfLinesPerRow>
+		<SummaryColumnType>max</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>StnPresMax</DbColumn>
+			<SpecialNumber number="-9999.5" symbol="X"/>
+			<SpecialNumber number="-9999.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>StnPresMaxTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+	
+	<ClimaticElement>
+		<Id>StnPresMin</Id>
+		<ChineseName>測站最低氣壓</ChineseName>
+		<EnglishName>Minimum Pressure at station</EnglishName>
+		<Unit>hPa</Unit>
+		<ContentsGroup>1</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>2</NumOfLinesPerRow>
+		<SummaryColumnType>min</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>StnPresMin</DbColumn>
+			<SpecialNumber number="-9999.5" symbol="X"/>
+			<SpecialNumber number="-9999.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>StnPresMinTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+	
+	
+	<ClimaticElement>
+		<Id>Tx</Id>
+		<ChineseName>平均氣溫</ChineseName>
+		<EnglishName>Mean Temperature</EnglishName>
+		<Unit>°C</Unit>
+		<ContentsGroup>2</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>mean</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>Tx</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>MeanTxMax</Id>
+		<ChineseName>平均最高氣溫</ChineseName>
+		<EnglishName>Mean Maximum Temperature</EnglishName>
+		<Unit>°C</Unit>
+		<ContentsGroup>2</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>mean</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>MeanTxMax</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>MeanTxMin</Id>
+		<ChineseName>平均最低氣溫</ChineseName>
+		<EnglishName>Mean Minimum Temperature</EnglishName>
+		<Unit>°C</Unit>
+		<ContentsGroup>2</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>mean</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>MeanTxMin</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>TxMaxAbs</Id>
+		<ChineseName>絕對最高氣溫</ChineseName>
+		<EnglishName>Absolute Maximum Temperature</EnglishName>
+		<Unit>°C</Unit>
+		<ContentsGroup>2</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>2</NumOfLinesPerRow>
+		<SummaryColumnType>max</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>TxMaxAbs</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>TxMaxAbsTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>TxMinAbs</Id>
+		<ChineseName>絕對最低氣溫</ChineseName>
+		<EnglishName>Absolute Minimum Temperature</EnglishName>
+		<Unit>°C</Unit>
+		<ContentsGroup>2</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>2</NumOfLinesPerRow>
+		<SummaryColumnType>min</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>TxMinAbs</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>TxMinAbsTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>TxRangeMax</Id>
+		<ChineseName>氣溫最大日較差</ChineseName>
+		<EnglishName>Maximum Daily Range of Temperature</EnglishName>
+		<Unit>°C</Unit>
+		<ContentsGroup>2</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>2</NumOfLinesPerRow>
+		<SummaryColumnType>max</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>TxRangeMax</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>TxRangeMaxTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+
+	
+	<ClimaticElement>
+		<Id>TxMaxGE30Day</Id>
+		<ChineseName>最高氣溫≧30℃日數</ChineseName>
+		<EnglishName>Number of Days with Maximum Temperature≧30℃</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>3</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>TxMaxGE30Day</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>TxGE25Day</Id>
+		<ChineseName>平均氣溫≧25℃日數</ChineseName>
+		<EnglishName>Number of Days with Mean Temperature≧25℃</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>3</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>TxGE25Day</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>TxMinLE10Day</Id>
+		<ChineseName>最低氣溫≦10℃日數</ChineseName>
+		<EnglishName>Number of Days with Minimum Temperature≦10℃</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>3</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>TxMinLE10Day</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	
+	<ClimaticElement>
+		<Id>VprPres</Id>
+		<ChineseName>平均水汽壓</ChineseName>
+		<EnglishName>Mean Vapor Pressure</EnglishName>
+		<Unit>hPa</Unit>
+		<ContentsGroup>4</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>mean</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>VprPres</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>VprPresMax</Id>
+		<ChineseName>最大水汽壓</ChineseName>
+		<EnglishName>Maximum Vapor Pressure</EnglishName>
+		<Unit>hPa</Unit>
+		<ContentsGroup>4</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>2</NumOfLinesPerRow>
+		<SummaryColumnType>max</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>VprPresMax</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>VprPresMaxTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>VprPresMin</Id>
+		<ChineseName>最小水汽壓</ChineseName>
+		<EnglishName>Minimum Vapor Pressure</EnglishName>
+		<Unit>hPa</Unit>
+		<ContentsGroup>4</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>2</NumOfLinesPerRow>
+		<SummaryColumnType>min</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>VprPresMin</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>VprPresMinTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>RH</Id>
+		<ChineseName>平均相對濕度</ChineseName>
+		<EnglishName>Mean Relative Humidity</EnglishName>
+		<Unit>%</Unit>
+		<ContentsGroup>4</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>mean</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>RH</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>RHMin</Id>
+		<ChineseName>最小相對濕度</ChineseName>
+		<EnglishName>Minimum Relative Humidity</EnglishName>
+		<Unit>%</Unit>
+		<ContentsGroup>4</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>2</NumOfLinesPerRow>
+		<SummaryColumnType>min</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>RHMin</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>RHMinTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+	
+	
+	<ClimaticElement>
+		<Id>CamtMean</Id>
+		<ChineseName>平均雲量</ChineseName>
+		<EnglishName>Mean Cloudiness</EnglishName>
+		<Unit>0-10</Unit>
+		<ContentsGroup>5</ContentsGroup>
+		<IsAutoStnMeasure>false</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>mean</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>CamtMean</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>ClearSkyDay</Id>
+		<ChineseName>碧空日數</ChineseName>
+		<EnglishName>Number of Clear Days</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>5</ContentsGroup>
+		<IsAutoStnMeasure>false</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>ClearSkyDay</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>ScatteredSkyDay</Id>
+		<ChineseName>疏雲日數</ChineseName>
+		<EnglishName>Number of Scattered Days</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>5</ContentsGroup>
+		<IsAutoStnMeasure>false</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>ScatteredSkyDay</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>BrokenSkyDay</Id>
+		<ChineseName>裂雲日數</ChineseName>
+		<EnglishName>Number of Broken Days</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>5</ContentsGroup>
+		<IsAutoStnMeasure>false</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>BrokenSkyDay</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>OvercastSkyDay</Id>
+		<ChineseName>密雲日數</ChineseName>
+		<EnglishName>Number of Overcast Days</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>5</ContentsGroup>
+		<IsAutoStnMeasure>false</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>OvercastSkyDay</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	
+	
+	<ClimaticElement>
+		<Id>SunShine</Id>
+		<ChineseName>日照時數</ChineseName>
+		<EnglishName>Sunshine Duration</EnglishName>
+		<Unit>hr</Unit>
+		<ContentsGroup>6</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>total</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>SunShine</DbColumn>
+			<SpecialNumber number="-999.5" symbol="X"/>
+			<SpecialNumber number="-999.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>SunShineRate</Id>
+		<ChineseName>日照率</ChineseName>
+		<EnglishName>Rate of Sunshine</EnglishName>
+		<Unit>%</Unit>
+		<ContentsGroup>6</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>mean</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>SunShineRate</DbColumn>
+			<SpecialNumber number="-999.5" symbol="X"/>
+			<SpecialNumber number="-999.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+		
+	
+	<ClimaticElement>
+		<Id>EvapA</Id>
+		<ChineseName>A 型皿蒸發量</ChineseName>
+		<EnglishName>Evaporation with “A” Type Pan</EnglishName>
+		<Unit>mm</Unit>
+		<ContentsGroup>7</ContentsGroup>
+		<IsAutoStnMeasure>false</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>total</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>EvapA</DbColumn>
+			<SpecialNumber number="-999.5" symbol="X"/>
+			<SpecialNumber number="-999.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	
+	<ClimaticElement>
+		<Id>EvapAMax</Id>
+		<ChineseName>A 型皿最大蒸發日量</ChineseName>
+		<EnglishName>Maximum Daily Evaporation with “A” Type Pan</EnglishName>
+		<Unit>mm</Unit>
+		<ContentsGroup>7</ContentsGroup>
+		<IsAutoStnMeasure>false</IsAutoStnMeasure>
+		<NumOfLinesPerRow>2</NumOfLinesPerRow>
+		<SummaryColumnType>evapAMax</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbdy</DbTable>
+			<DbColumn>EvapA</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbdy</DbTable>
+			<DbColumn>ObsTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+	
+	
+	
+	<ClimaticElement>
+		<Id>Precp</Id>
+		<ChineseName>降水量</ChineseName>
+		<EnglishName>Precipitation</EnglishName>
+		<Unit>mm</Unit>
+		<ContentsGroup>8</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>total</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>Precp</DbColumn>
+			<SpecialNumber number="-9999.5" symbol="X"/>
+			<SpecialNumber number="-9999.7" symbol="#"/>
+			<SpecialNumber number="-9.8" symbol="T"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>PrecpHour</Id>
+		<ChineseName>降水時數</ChineseName>
+		<EnglishName>Amount of Precipitation Duration</EnglishName>
+		<Unit>hr</Unit>
+		<ContentsGroup>8</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>total</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>PrecpHour</DbColumn>
+			<SpecialNumber number="-999.5" symbol="X"/>
+			<SpecialNumber number="-999.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>Precp1DayMax</Id>
+		<ChineseName>一日最大降水量</ChineseName>
+		<EnglishName>Daily Maximum Precipitation</EnglishName>
+		<Unit>mm</Unit>
+		<ContentsGroup>8</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>2</NumOfLinesPerRow>
+		<SummaryColumnType>max</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>Precp1DayMax</DbColumn>
+			<SpecialNumber number="-999.5" symbol="X"/>
+			<SpecialNumber number="-999.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>Precp1DayMaxTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>PrecpHrMax</Id>
+		<ChineseName>一小時最大降水量</ChineseName>
+		<EnglishName>Maximum Precipitation in One Hour</EnglishName>
+		<Unit>mm</Unit>
+		<ContentsGroup>8</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>2</NumOfLinesPerRow>
+		<SummaryColumnType>max</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>PrecpHrMax</DbColumn>
+			<SpecialNumber number="-9999.5" symbol="X"/>
+			<SpecialNumber number="-9999.7" symbol="#"/>
+			<SpecialNumber number="-9.8" symbol="T"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>PrecpHrMaxTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>PrecpMax10</Id>
+		<ChineseName>十分鐘最大降水量</ChineseName>
+		<EnglishName>Maximum Precipitation in Ten Minutes</EnglishName>
+		<Unit>mm</Unit>
+		<ContentsGroup>8</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>2</NumOfLinesPerRow>
+		<SummaryColumnType>max</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>PrecpMax10</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<SpecialNumber number="-9.8" symbol="T"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>PrecpMax10Time</DbColumn>
+		</Data>
+	</ClimaticElement>
+
+	
+	<ClimaticElement>
+		<Id>PrecpDay</Id>
+		<ChineseName>降水量≧0.1mm 日數</ChineseName>
+		<EnglishName>Number of Days with Precipitation≧0.1mm</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>9</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>PrecpDay</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>PrecpGE1mmDay</Id>
+		<ChineseName>降水量≧1.0mm 日數</ChineseName>
+		<EnglishName>Number of Days with Precipitation≧1.0mm</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>9</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>PrecpGE1mmDay</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>PrecpGE10mmDay</Id>
+		<ChineseName>降水量≧10.0mm 日數</ChineseName>
+		<EnglishName>Number of Days with Precipitation≧10.0mm</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>9</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>PrecpGE10mmDay</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+
+	
+	<ClimaticElement>
+		<Id>ThunderstormDay</Id>
+		<ChineseName>雷暴日數</ChineseName>
+		<EnglishName>Number of Days with Thunderstorm</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>10</ContentsGroup>
+		<IsAutoStnMeasure>false</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>ThunderstormDay</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>FogDay</Id>
+		<ChineseName>霧日數</ChineseName>
+		<EnglishName>Number of Days with Fog</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>10</ContentsGroup>
+		<IsAutoStnMeasure>false</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>FogDay</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>FrostDay</Id>
+		<ChineseName>霜日數</ChineseName>
+		<EnglishName>Number of Days with Frost</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>10</ContentsGroup>
+		<IsAutoStnMeasure>false</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>FrostDay</DbColumn>
+			<SpecialNumber number="-99.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>SnowDay</Id>
+		<ChineseName>雪日數</ChineseName>
+		<EnglishName>Number of Days with Snow</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>10</ContentsGroup>
+		<IsAutoStnMeasure>false</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>SnowDay</DbColumn>
+			<SpecialNumber number="-99.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+
+	
+	<ClimaticElement>
+		<Id>WS</Id>
+		<ChineseName>平均風速</ChineseName>
+		<EnglishName>Mean Wind Velocity(10 minutes)</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>11</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>mean</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>WS</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>WSMax</Id>
+		<ChineseName>最大風速及方向</ChineseName>
+		<EnglishName>Maximum Wind Velocity &amp; Direction (360°)</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>11</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>3</NumOfLinesPerRow>
+		<SummaryColumnType>dualMax</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>WSMax</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "secondColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>WDMax</DbColumn>
+			<SpecialNumber number="-999.5" symbol="X"/>
+			<SpecialNumber number="-999.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>WmaxTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>WSMaxGE10Day</Id>
+		<ChineseName>強風日數</ChineseName>
+		<EnglishName>Number of Days with Strong Wind(≧10m/s)</EnglishName>
+		<Unit>none</Unit>
+		<ContentsGroup>11</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>1</NumOfLinesPerRow>
+		<SummaryColumnType>totalDay</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>WSMaxGE10Day</DbColumn>
+			<SpecialNumber number="-9995.0" symbol="X"/>
+			<SpecialNumber number="-9997.0" symbol="#"/>
+			<Approximation>0</Approximation>
+			<SubstituteZero>true</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	<ClimaticElement>
+		<Id>WSGust</Id>
+		<ChineseName>極大陣風(瞬間風)</ChineseName>
+		<EnglishName>Maximum Gust(Instantaneous Wind)</EnglishName>
+		<Unit>m/s</Unit>
+		<ContentsGroup>11</ContentsGroup>
+		<IsAutoStnMeasure>true</IsAutoStnMeasure>
+		<NumOfLinesPerRow>3</NumOfLinesPerRow>
+		<SummaryColumnType>dualMax</SummaryColumnType>
+		<Data type = "firstColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>WSGust</DbColumn>
+			<SpecialNumber number="-99.5" symbol="X"/>
+			<SpecialNumber number="-99.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "secondColumn">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>WDGust</DbColumn>
+			<SpecialNumber number="-999.5" symbol="X"/>
+			<SpecialNumber number="-999.7" symbol="#"/>
+			<Approximation>-1</Approximation>
+			<SubstituteZero>false</SubstituteZero>
+		</Data>
+		<Data type = "time">
+			<DbTable>his_cwbmn</DbTable>
+			<DbColumn>WgustTime</DbColumn>
+		</Data>
+	</ClimaticElement>
+	
+	<!-- Sample -->
+	<!--
+	<ClimaticElement>
+		<Id>唯一名，也是中繼資料表的climaticElement欄位值。請勿和其他氣象要素ID撞名。</Id>
+		<ChineseName>此氣象要素的中文標題名，例如，'紫外線量'</ChineseName>
+		<EnglishName>此氣象要素的英文標題名，例如，'Ultraviolet rays'</EnglishName>
+		<Unit>單位，例如'm/s'，若無單位請填寫'none'</Unit>
+		<ContentsGroup>在總目錄屬於哪個群組，例如，'11'。(但目前無功能)</ContentsGroup>
+		<IsAutoStnMeasure>無人測站是否要量測此項目？是填'true', 否填'false'</IsAutoStnMeasure>
+		<NumOfLinesPerRow>此表格單一欄位有幾行，例如，'1'。</NumOfLinesPerRow>
+		<SummaryColumnType>表格最後一欄位要放置何種值？若是平均值請放'mean'，加總值請放'total'，氣象要素天數表格請放'totalDay'</SummaryColumnType>
+		<Data type = 可為'firstColumn', 'secondColumn', 'time'> 
+			<DbTable>此欄位從何表格取值，通常是'his_cwbmn'</DbTable>
+			<DbColumn>此欄位要取his_cwbmn裡的哪個欄位名，例如'WSGust'</DbColumn>
+			<SpecialNumber number=特殊值，例如'-999.5'。可設定多組特殊值。請放到小數點後第一位，例如-999請放置-999.0。
+							symbol=當出現此特殊值表現出的代號，例如'X'/>
+			<Approximation>第二部分表格單一年度數值要算到哪一位？'-1'表示小數後第一位，'0'表示整數位</Approximation>
+			<SubstituteZero>當數值為零時是否要以'-'表示？是填'true', 否填'false'</SubstituteZero>
+		</Data>
+	</ClimaticElement>
+	-->
+</ClimaticElements>

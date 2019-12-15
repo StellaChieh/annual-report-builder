@@ -1,0 +1,43 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ClimaticElements">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ClimaticElement" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="Id"/>
+              <xs:element type="xs:string" name="ChineseName"/>
+              <xs:element type="xs:string" name="EnglishName"/>
+              <xs:element type="xs:string" name="Unit"/>
+              <xs:element type="xs:int" name="ContentsGroup"/>
+              <xs:element type="xs:boolean" name="IsAutoStnMeasure"/>
+              <xs:element type="xs:int" name="NumOfLinesPerRow"/>
+              <xs:element type="xs:string" name="SummaryColumnType"/>
+              <xs:element name="Data" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="DbTable"/>
+                    <xs:element type="xs:string" name="DbColumn"/>
+                    <xs:element name="SpecialNumber" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:double" name="number" use="optional"/>
+                            <xs:attribute type="xs:string" name="symbol" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:int" name="Approximation" minOccurs="0"/>
+                    <xs:element type="xs:boolean" name="SubstituteZero" minOccurs="0"/>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="type" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

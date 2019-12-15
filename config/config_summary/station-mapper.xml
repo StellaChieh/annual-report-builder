@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+<mapper namespace="cwb.cmt.summary.dao.StationDao"> 
+	
+	<select id ="selectStation"  parameterType ="java.util.List" resultType="cwb.cmt.summary.model.Stations$Station">  
+	        SELECT Stno AS stno, StnEName AS stnEName, Longitude AS longitude, Latitude AS latitude
+				, HBarometer AS hBarometer, HTherm AS hTherm, HRaingauge AS hRaingauge, HAnem AS hAnem
+				, Altitude AS altitude, StnBeginTime AS stnBeginTime, Manobsnum AS manObsNum 	 
+			FROM station
+			WHERE Stno in 
+	    <foreach collection="list" item="element" index="index" open="(" separator=","  close=")">
+			#{element.stno}
+	    </foreach>
+	</select > 
+
+	
+</mapper>
+

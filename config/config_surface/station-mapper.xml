@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+<!--mapper namespace="cwb.cmt.surface.dao.StationDao"--> 
+<mapper namespace="cwb.cmt.surface.dao.StationDao"> 
+	<!--1.1 List of Stations of Central Weather Bureau-->
+	<select id ="selectStation"  parameterType ="java.util.List" resultType="cwb.cmt.surface.model.Station">  
+	        SELECT Stno AS stno, StnEName AS stnEName, Longitude AS longitude, Latitude AS latitude
+				, HBarometer AS hBarometer, HTherm AS hTherm, HRaingauge AS hRaingauge, HAnem AS hAnem
+				, Altitude AS altitude, StnBeginTime AS stnBeginTime, StnEndTime AS stnEndTime
+				, Manobsnum AS manObsNum 
+			FROM station
+			WHERE Stno IN
+	    <foreach collection="list" item="element" index="index" open="(" separator=","  close=")">	         
+			#{element.stno}
+	    </foreach>
+	</select > 
+	
+	<!--2.2 List of Weather Station Number of Other Organization-->
+	<select id ="selectOtherStns"  parameterType ="java.util.HashMap" resultType="cwb.cmt.surface.model.Station"> 
+			SELECT Stno AS stno, City AS city, Address AS address, Classify AS classify, StnEndTime AS stnEndTime, charge_ins AS charge_ins
+			FROM station
+			WHERE 
+			(
+				(Stno LIKE 'C0%' OR Stno LIKE 'C1%') 
+				AND Classify='autoprec' 
+				AND (charge_ins='中央氣象局' OR charge_ins='中央氣象署')
+				AND (StnEndTime is NULL 
+					<![CDATA[
+					OR  StnEndTime>=#{year}
+					]]>)
+			)
+		<!--
+			OR 
+			(
+				Classify='caa' 
+				AND (StnEndTime is NULL 
+					<![CDATA[
+					OR StnEndTime>=#{year}
+					]]>)
+			)
+		-->
+			ORDER BY Classify ASC
+	</select > 
+</mapper>

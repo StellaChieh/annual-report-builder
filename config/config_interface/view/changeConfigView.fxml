@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1300.0" stylesheets="@../css/bootstrap3.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cwb.cmt.view.controller.ChangeConfigViewController">
+   <children>
+      <Label layoutX="47.0" layoutY="202.0" text="高空" />
+      <Separator layoutY="156.0" prefHeight="13.0" prefWidth="1300.0" />
+      <Label layoutX="47.0" layoutY="45.0" text="地面" />
+      <Separator layoutY="325.0" prefHeight="13.0" prefWidth="1307.0" AnchorPane.topAnchor="320.0" />
+      <Label layoutX="47.0" layoutY="358.0" text="彙編" />
+      <HBox layoutX="47.0" layoutY="89.0" prefHeight="44.0" prefWidth="435.0" spacing="25.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onChangeSurfaceStationBtn" styleClass="info" text="增刪修測站" />
+            <Button mnemonicParsing="false" onAction="#onChangeSurfaceClimaticElementBtn" styleClass="info" text="增刪修氣象要素" />
+         </children>
+      </HBox>
+      <HBox layoutX="47.0" layoutY="242.0" prefHeight="40.0" prefWidth="252.0" spacing="25.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onChangeUpperairStationBtn" styleClass="info" text="增刪修測站" />
+         </children>
+      </HBox>
+      <HBox layoutX="47.0" layoutY="398.0" prefHeight="41.0" prefWidth="390.0" spacing="25.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onChangeSummaryStationBtn" styleClass="info" text="增刪修測站" />
+            <Button mnemonicParsing="false" onAction="#onChangeSummaryClimaticElementBtn" styleClass="info" text="增刪修氣象要素" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,7 @@
+dependencies {
+	compile group: 'org.apache.commons', name: 'commons-configuration2', version: '2.2'
+	compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
+	compile project(':app_surface')
+	compile project(':app_summary')
+	compile project(':app_upperair')
+}
